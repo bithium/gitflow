@@ -27,7 +27,7 @@
 # policies, either expressed or implied, of Vincent Driessen.
 #
 
-prefix=/usr/local
+DESTDIR?=/usr/local
 
 # files that need mode 755
 EXEC_FILES=git-flow
@@ -48,11 +48,11 @@ all:
 
 install:
 	@test -f gitflow-shFlags || (echo "Run 'git submodule init && git submodule update' first." ; exit 1 )
-	install -d -m 0755 $(prefix)/bin
-	install -m 0755 $(EXEC_FILES) $(prefix)/bin
-	install -m 0644 $(SCRIPT_FILES) $(prefix)/bin
+	install -d -m 0755 $(DESTDIR)
+	install -m 0755 $(EXEC_FILES) $(DESTDIR)
+	install -m 0644 $(SCRIPT_FILES) $(DESTDIR)
 
 uninstall:
-	test -d $(prefix)/bin && \
-	cd $(prefix)/bin && \
+	test -d $(DESTDIR) && \
+	cd $(DESTDIR) && \
 	rm -f $(EXEC_FILES) $(SCRIPT_FILES)
